@@ -5,6 +5,7 @@ public class Stan extends Nekretnina {
     private double povrsinaPodruma;
     private double povrsinaTerase;
     private double cena;
+    public String greska = "Pogresno unet podatak!";
 
     @Override
     public double izracunajCenu() {
@@ -33,16 +34,23 @@ public class Stan extends Nekretnina {
         return cena;
     }
 
-
-
-
     public Stan() {
     }
 
-    public Stan(String adresa, int zona, double kvadratura, Vlasnik vlasnik, double povrsinaPodruma, double povrsinaTerase) {
+    public Stan(String adresa, int zona, double kvadratura, Vlasnik vlasnik, double povrsinaPodruma, double povrsinaTerase) throws Exception {
         super(adresa, zona, kvadratura, vlasnik);
         this.povrsinaPodruma = povrsinaPodruma;
         this.povrsinaTerase = povrsinaTerase;
+
+        if(povrsinaPodruma < 0){
+            throw new Exception("Pogresno uneta povrsina podruma");
+        }
+
+        if(povrsinaTerase < 0){
+            throw new Exception("Pogresno uneta povrsina terase");
+        }
+
+
     }
 
     public double getPovrsinaPodruma() {
@@ -71,6 +79,6 @@ public class Stan extends Nekretnina {
     //i tried using super.toString() to call the method from Nekretnine
     @Override
     public String toString() {
-        return super.toString() + ". Stan ima terasu velicine " + getPovrsinaTerase() + " kvm i podrum velicine " + getPovrsinaPodruma() + " kvm. Cena stana iznosi " + izracunajCenu() + " EUR.";
+        return "Podaci o stanu: \nAdresa: " + getAdresa() + "\nZona: " + getZona() + "\nKvadratura: " + getKvadratura() + "\nTerasa:  " + getPovrsinaTerase() + " kvm \npodrum velicine " + getPovrsinaPodruma() + " kvm. \nCena stana iznosi " + izracunajCenu() + " EUR. \nPodaci o vlasniku: \n" + getVlasnik();
     }
 }

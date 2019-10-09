@@ -3,10 +3,12 @@ package zadatak1;
 public class Kuca extends Nekretnina {
 
     private double povrsinaOkucnice;
-    private double cena;
+
 
     @Override
     public double izracunajCenu() {
+
+        double cena = 0;
 
         if(getZona() == 1){
 
@@ -34,9 +36,13 @@ public class Kuca extends Nekretnina {
     public Kuca() {
     }
 
-    public Kuca(String adresa, int zona, double kvadratura, Vlasnik vlasnik, double povrsinaOkucnice) {
+    public Kuca(String adresa, int zona, double kvadratura, Vlasnik vlasnik, double povrsinaOkucnice) throws Exception {
         super(adresa, zona, kvadratura, vlasnik);
         this.povrsinaOkucnice = povrsinaOkucnice;
+
+        if (povrsinaOkucnice < 1){
+            throw new Exception("KPogresno uneta povrsina okucnice");
+        }
     }
 
     public double getPovrsinaOkucnice() {
@@ -49,6 +55,6 @@ public class Kuca extends Nekretnina {
     //i overrode the whole toString() method for Kuca
     @Override
     public String toString() {
-        return "Kuca se nalazi na adresi " + getAdresa() + " i velicine je " + getKvadratura() + " kvm. Nalazi se u " + getZona() + "-oj zoni. Povrsina okucnice je " + getPovrsinaOkucnice() + " kvm. Cena kuce iznosi " + izracunajCenu() + " EUR. Podaci o vlasniku: " + getVlasnik() + ".";
+        return "Podaci o kuci: \nAdresa: " + getAdresa() + "\nZona: " + getZona() + "\nKvadratura: " + getKvadratura() + "\nPovrsina okucnice: " + getPovrsinaOkucnice() + " kvm. \nCena kuce iznosi " + izracunajCenu() + " EUR. \nPodaci o vlasniku: \n" + getVlasnik();
     }
 }
